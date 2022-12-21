@@ -13,7 +13,7 @@ namespace webApi.Models
             Name_Place = place.Name_Place;
             ID_Category = place.ID_Category;
             ID_Kitchen = place.ID_Kitchen;
-            AverageCheck = place.AverageCheck;
+            AverageCheck = (int)place.AverageCheck;
             Stars = place.Stars;
 
         }

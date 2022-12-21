@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="b9573a73b7e34ad38ccd1a3da063b857" Name="Diagram1" ZoomLevel="52">
+      <Diagram DiagramId="b9573a73b7e34ad38ccd1a3da063b857" Name="Diagram1" ZoomLevel="10">
         <EntityTypeShape EntityType="Petunenkova_API_TogetherModel.Category" Width="1.5" PointX="0.75" PointY="0.75" />
         <EntityTypeShape EntityType="Petunenkova_API_TogetherModel.Freetime" Width="1.5" PointX="3" PointY="7.5" />
         <EntityTypeShape EntityType="Petunenkova_API_TogetherModel.Gender" Width="1.5" PointX="3" PointY="11" />

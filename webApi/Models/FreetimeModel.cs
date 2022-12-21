@@ -16,7 +16,7 @@ namespace webApi.Models
            
         }
         public int ID_Freetime { get; set; }
-        public string Data_met { get; set; }
+        public DateTime Data_met { get; set; }
         public string Month { get; set; }
 
     }
