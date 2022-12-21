@@ -1,0 +1,438 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Хранилище Petunenkova_API_TogetherModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="ID_Category" />
+          </Key>
+          <Property Name="ID_Category" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name_category" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Freetime">
+          <Key>
+            <PropertyRef Name="ID_Freetime" />
+          </Key>
+          <Property Name="ID_Freetime" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Data_met" Type="date" Nullable="false" />
+          <Property Name="Month" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Gender">
+          <Key>
+            <PropertyRef Name="Id_Gender" />
+          </Key>
+          <Property Name="Id_Gender" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Gender_name" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Kitchen">
+          <Key>
+            <PropertyRef Name="ID_Kitchen" />
+          </Key>
+          <Property Name="ID_Kitchen" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name_Kitchen" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Place">
+          <Key>
+            <PropertyRef Name="ID_Place" />
+          </Key>
+          <Property Name="ID_Place" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name_Place" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="ID_Category" Type="int" Nullable="false" />
+          <Property Name="ID_Kitchen" Type="int" Nullable="false" />
+          <Property Name="AverageCheck" Type="int" />
+          <Property Name="Stars" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="ID_User" />
+          </Key>
+          <Property Name="ID_User" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name_User" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Firstname_User" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Login" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Age" Type="int" Nullable="false" />
+          <Property Name="ID_Gender" Type="int" Nullable="false" />
+          <Property Name="ID_Freetime" Type="int" Nullable="false" />
+          <Property Name="Adout_user" Type="nvarchar(max)" />
+          <Property Name="ID_fav_place" Type="int" Nullable="false" />
+          <Property Name="ID_fav_kitchen" Type="int" Nullable="false" />
+          <Property Name="Photo_user" Type="nvarchar(max)" />
+        </EntityType>
+        <Association Name="FK_Place_Category">
+          <End Role="Category" Type="Self.Category" Multiplicity="1" />
+          <End Role="Place" Type="Self.Place" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="ID_Category" />
+            </Principal>
+            <Dependent Role="Place">
+              <PropertyRef Name="ID_Category" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Place_Kitchen">
+          <End Role="Kitchen" Type="Self.Kitchen" Multiplicity="1" />
+          <End Role="Place" Type="Self.Place" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kitchen">
+              <PropertyRef Name="ID_Kitchen" />
+            </Principal>
+            <Dependent Role="Place">
+              <PropertyRef Name="ID_Kitchen" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_Freetime">
+          <End Role="Freetime" Type="Self.Freetime" Multiplicity="1" />
+          <End Role="User" Type="Self.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Freetime">
+              <PropertyRef Name="ID_Freetime" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="ID_Freetime" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_Gender">
+          <End Role="Gender" Type="Self.Gender" Multiplicity="1" />
+          <End Role="User" Type="Self.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Gender">
+              <PropertyRef Name="Id_Gender" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="ID_Gender" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_Kitchen">
+          <End Role="Kitchen" Type="Self.Kitchen" Multiplicity="1" />
+          <End Role="User" Type="Self.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kitchen">
+              <PropertyRef Name="ID_Kitchen" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="ID_fav_kitchen" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_Place">
+          <End Role="Place" Type="Self.Place" Multiplicity="1" />
+          <End Role="User" Type="Self.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Place">
+              <PropertyRef Name="ID_Place" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="ID_fav_place" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище Petunenkova_API_TogetherModelContainer">
+          <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Freetime" EntityType="Self.Freetime" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Gender" EntityType="Self.Gender" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Kitchen" EntityType="Self.Kitchen" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Place" EntityType="Self.Place" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Place_Category" Association="Self.FK_Place_Category">
+            <End Role="Category" EntitySet="Category" />
+            <End Role="Place" EntitySet="Place" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Place_Kitchen" Association="Self.FK_Place_Kitchen">
+            <End Role="Kitchen" EntitySet="Kitchen" />
+            <End Role="Place" EntitySet="Place" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Freetime" Association="Self.FK_User_Freetime">
+            <End Role="Freetime" EntitySet="Freetime" />
+            <End Role="User" EntitySet="User" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Gender" Association="Self.FK_User_Gender">
+            <End Role="Gender" EntitySet="Gender" />
+            <End Role="User" EntitySet="User" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Kitchen" Association="Self.FK_User_Kitchen">
+            <End Role="Kitchen" EntitySet="Kitchen" />
+            <End Role="User" EntitySet="User" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Place" Association="Self.FK_User_Place">
+            <End Role="Place" EntitySet="Place" />
+            <End Role="User" EntitySet="User" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Petunenkova_API_TogetherModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="Petunenkova_API_TogetherEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Category" EntityType="Petunenkova_API_TogetherModel.Category" />
+          <EntitySet Name="Freetime" EntityType="Petunenkova_API_TogetherModel.Freetime" />
+          <EntitySet Name="Gender" EntityType="Petunenkova_API_TogetherModel.Gender" />
+          <EntitySet Name="Kitchen" EntityType="Petunenkova_API_TogetherModel.Kitchen" />
+          <EntitySet Name="Place" EntityType="Petunenkova_API_TogetherModel.Place" />
+          <EntitySet Name="User" EntityType="Petunenkova_API_TogetherModel.User" />
+          <AssociationSet Name="FK_Place_Category" Association="Petunenkova_API_TogetherModel.FK_Place_Category">
+            <End Role="Category" EntitySet="Category" />
+            <End Role="Place" EntitySet="Place" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Freetime" Association="Petunenkova_API_TogetherModel.FK_User_Freetime">
+            <End Role="Freetime" EntitySet="Freetime" />
+            <End Role="User" EntitySet="User" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Gender" Association="Petunenkova_API_TogetherModel.FK_User_Gender">
+            <End Role="Gender" EntitySet="Gender" />
+            <End Role="User" EntitySet="User" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Place_Kitchen" Association="Petunenkova_API_TogetherModel.FK_Place_Kitchen">
+            <End Role="Kitchen" EntitySet="Kitchen" />
+            <End Role="Place" EntitySet="Place" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Kitchen" Association="Petunenkova_API_TogetherModel.FK_User_Kitchen">
+            <End Role="Kitchen" EntitySet="Kitchen" />
+            <End Role="User" EntitySet="User" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Place" Association="Petunenkova_API_TogetherModel.FK_User_Place">
+            <End Role="Place" EntitySet="Place" />
+            <End Role="User" EntitySet="User" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="ID_Category" />
+          </Key>
+          <Property Name="ID_Category" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name_category" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Place" Relationship="Petunenkova_API_TogetherModel.FK_Place_Category" FromRole="Category" ToRole="Place" />
+        </EntityType>
+        <EntityType Name="Freetime">
+          <Key>
+            <PropertyRef Name="ID_Freetime" />
+          </Key>
+          <Property Name="ID_Freetime" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Data_met" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Month" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="User" Relationship="Petunenkova_API_TogetherModel.FK_User_Freetime" FromRole="Freetime" ToRole="User" />
+        </EntityType>
+        <EntityType Name="Gender">
+          <Key>
+            <PropertyRef Name="Id_Gender" />
+          </Key>
+          <Property Name="Id_Gender" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Gender_name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="User" Relationship="Petunenkova_API_TogetherModel.FK_User_Gender" FromRole="Gender" ToRole="User" />
+        </EntityType>
+        <EntityType Name="Kitchen">
+          <Key>
+            <PropertyRef Name="ID_Kitchen" />
+          </Key>
+          <Property Name="ID_Kitchen" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name_Kitchen" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Place" Relationship="Petunenkova_API_TogetherModel.FK_Place_Kitchen" FromRole="Kitchen" ToRole="Place" />
+          <NavigationProperty Name="User" Relationship="Petunenkova_API_TogetherModel.FK_User_Kitchen" FromRole="Kitchen" ToRole="User" />
+        </EntityType>
+        <EntityType Name="Place">
+          <Key>
+            <PropertyRef Name="ID_Place" />
+          </Key>
+          <Property Name="ID_Place" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name_Place" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ID_Category" Type="Int32" Nullable="false" />
+          <Property Name="ID_Kitchen" Type="Int32" Nullable="false" />
+          <Property Name="AverageCheck" Type="Int32" />
+          <Property Name="Stars" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Category" Relationship="Petunenkova_API_TogetherModel.FK_Place_Category" FromRole="Place" ToRole="Category" />
+          <NavigationProperty Name="Kitchen" Relationship="Petunenkova_API_TogetherModel.FK_Place_Kitchen" FromRole="Place" ToRole="Kitchen" />
+          <NavigationProperty Name="User" Relationship="Petunenkova_API_TogetherModel.FK_User_Place" FromRole="Place" ToRole="User" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="ID_User" />
+          </Key>
+          <Property Name="ID_User" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name_User" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Firstname_User" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Login" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Age" Type="Int32" Nullable="false" />
+          <Property Name="ID_Gender" Type="Int32" Nullable="false" />
+          <Property Name="ID_Freetime" Type="Int32" Nullable="false" />
+          <Property Name="Adout_user" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ID_fav_place" Type="Int32" Nullable="false" />
+          <Property Name="ID_fav_kitchen" Type="Int32" Nullable="false" />
+          <Property Name="Photo_user" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Freetime" Relationship="Petunenkova_API_TogetherModel.FK_User_Freetime" FromRole="User" ToRole="Freetime" />
+          <NavigationProperty Name="Gender" Relationship="Petunenkova_API_TogetherModel.FK_User_Gender" FromRole="User" ToRole="Gender" />
+          <NavigationProperty Name="Kitchen" Relationship="Petunenkova_API_TogetherModel.FK_User_Kitchen" FromRole="User" ToRole="Kitchen" />
+          <NavigationProperty Name="Place" Relationship="Petunenkova_API_TogetherModel.FK_User_Place" FromRole="User" ToRole="Place" />
+        </EntityType>
+        <Association Name="FK_Place_Category">
+          <End Type="Petunenkova_API_TogetherModel.Category" Role="Category" Multiplicity="1" />
+          <End Type="Petunenkova_API_TogetherModel.Place" Role="Place" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="ID_Category" />
+            </Principal>
+            <Dependent Role="Place">
+              <PropertyRef Name="ID_Category" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_Freetime">
+          <End Type="Petunenkova_API_TogetherModel.Freetime" Role="Freetime" Multiplicity="1" />
+          <End Type="Petunenkova_API_TogetherModel.User" Role="User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Freetime">
+              <PropertyRef Name="ID_Freetime" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="ID_Freetime" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_Gender">
+          <End Type="Petunenkova_API_TogetherModel.Gender" Role="Gender" Multiplicity="1" />
+          <End Type="Petunenkova_API_TogetherModel.User" Role="User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Gender">
+              <PropertyRef Name="Id_Gender" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="ID_Gender" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Place_Kitchen">
+          <End Type="Petunenkova_API_TogetherModel.Kitchen" Role="Kitchen" Multiplicity="1" />
+          <End Type="Petunenkova_API_TogetherModel.Place" Role="Place" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kitchen">
+              <PropertyRef Name="ID_Kitchen" />
+            </Principal>
+            <Dependent Role="Place">
+              <PropertyRef Name="ID_Kitchen" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_Kitchen">
+          <End Type="Petunenkova_API_TogetherModel.Kitchen" Role="Kitchen" Multiplicity="1" />
+          <End Type="Petunenkova_API_TogetherModel.User" Role="User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kitchen">
+              <PropertyRef Name="ID_Kitchen" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="ID_fav_kitchen" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_Place">
+          <End Type="Petunenkova_API_TogetherModel.Place" Role="Place" Multiplicity="1" />
+          <End Type="Petunenkova_API_TogetherModel.User" Role="User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Place">
+              <PropertyRef Name="ID_Place" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="ID_fav_place" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище Petunenkova_API_TogetherModelContainer" CdmEntityContainer="Petunenkova_API_TogetherEntities">
+          <EntitySetMapping Name="Category">
+            <EntityTypeMapping TypeName="Petunenkova_API_TogetherModel.Category">
+              <MappingFragment StoreEntitySet="Category">
+                <ScalarProperty Name="Name_category" ColumnName="Name_category" />
+                <ScalarProperty Name="ID_Category" ColumnName="ID_Category" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Freetime">
+            <EntityTypeMapping TypeName="Petunenkova_API_TogetherModel.Freetime">
+              <MappingFragment StoreEntitySet="Freetime">
+                <ScalarProperty Name="Month" ColumnName="Month" />
+                <ScalarProperty Name="Data_met" ColumnName="Data_met" />
+                <ScalarProperty Name="ID_Freetime" ColumnName="ID_Freetime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Gender">
+            <EntityTypeMapping TypeName="Petunenkova_API_TogetherModel.Gender">
+              <MappingFragment StoreEntitySet="Gender">
+                <ScalarProperty Name="Gender_name" ColumnName="Gender_name" />
+                <ScalarProperty Name="Id_Gender" ColumnName="Id_Gender" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Kitchen">
+            <EntityTypeMapping TypeName="Petunenkova_API_TogetherModel.Kitchen">
+              <MappingFragment StoreEntitySet="Kitchen">
+                <ScalarProperty Name="Name_Kitchen" ColumnName="Name_Kitchen" />
+                <ScalarProperty Name="ID_Kitchen" ColumnName="ID_Kitchen" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Place">
+            <EntityTypeMapping TypeName="Petunenkova_API_TogetherModel.Place">
+              <MappingFragment StoreEntitySet="Place">
+                <ScalarProperty Name="Stars" ColumnName="Stars" />
+                <ScalarProperty Name="AverageCheck" ColumnName="AverageCheck" />
+                <ScalarProperty Name="ID_Kitchen" ColumnName="ID_Kitchen" />
+                <ScalarProperty Name="ID_Category" ColumnName="ID_Category" />
+                <ScalarProperty Name="Name_Place" ColumnName="Name_Place" />
+                <ScalarProperty Name="ID_Place" ColumnName="ID_Place" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="User">
+            <EntityTypeMapping TypeName="Petunenkova_API_TogetherModel.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="Photo_user" ColumnName="Photo_user" />
+                <ScalarProperty Name="ID_fav_kitchen" ColumnName="ID_fav_kitchen" />
+                <ScalarProperty Name="ID_fav_place" ColumnName="ID_fav_place" />
+                <ScalarProperty Name="Adout_user" ColumnName="Adout_user" />
+                <ScalarProperty Name="ID_Freetime" ColumnName="ID_Freetime" />
+                <ScalarProperty Name="ID_Gender" ColumnName="ID_Gender" />
+                <ScalarProperty Name="Age" ColumnName="Age" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Login" ColumnName="Login" />
+                <ScalarProperty Name="Firstname_User" ColumnName="Firstname_User" />
+                <ScalarProperty Name="Name_User" ColumnName="Name_User" />
+                <ScalarProperty Name="ID_User" ColumnName="ID_User" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
